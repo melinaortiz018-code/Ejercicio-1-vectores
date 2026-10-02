@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 7</title>
+</head>
+<body>
+    <script>
+        let N = parseInt(prompt("¿Ingrese la cantidad de números primos a mostrar?"));
+
+        let contadorPrimosEncontrados = 0;
+        let numeroEvaluar = 2; 
+
+        let contadorRango1_10 = 0;
+        let contadorRango15_25 = 0;
+
+        document.write("<b>Los primeros " + N + " números primos son:</b><br>");
+
+        while (contadorPrimosEncontrados < N) {
+            
+            let esPrimo = true;
+            for (let i = 2; i < numeroEvaluar; i++) {
+                if (numeroEvaluar % i === 0) {
+                    esPrimo = false; 
+                    break;
+                }
+            }
+
+            if (esPrimo) {
+                document.write(numeroEvaluar + " ");
+                contadorPrimosEncontrados++;
+
+                if (numeroEvaluar >= 1 && numeroEvaluar <= 10) {
+                    contadorRango1_10++;
+                } else if (numeroEvaluar >= 15 && numeroEvaluar <= 25) {
+                    contadorRango15_25++;
+                }
+            }
+
+            numeroEvaluar++; 
+        }
+
+        document.write("<br><br><b>Conteo por rangos:</b><br>");
+        document.write("Primos entre 1 y 10: " + contadorRango1_10 + "<br>");
+        document.write("Primos entre 15 y 25: " + contadorRango15_25 + "<br>");
+    </script>
+</body>
+</html>

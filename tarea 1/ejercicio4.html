@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 4 - Potencia</title>
+</head>
+<body>
+    <script >
+    
+        let base = parseFloat(prompt("Ingrese la base (A):"));
+        let exponente = parseInt(prompt("Ingrese el exponente (B):"));
+
+        let resultado = 1;
+
+        let exponentePositivo = Math.abs(exponente);
+
+        for (let i = 0; i < exponentePositivo; i++) {
+            resultado = resultado * base;
+        }
+
+        if (exponente < 0) {
+            resultado = 1 / resultado;
+        }
+
+        document.write("El resultado de " + base + " elevado a " + exponente + " es: " + resultado);
+    </script>
+</body>
+</html>

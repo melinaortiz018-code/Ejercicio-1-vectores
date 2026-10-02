@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de inventario</title>
+</head>
+<body>
+    <table border="1">
+        <thead>
+            <tr>
+                <td colspan="4" align="center" bgcolor="#CCC">Control de Inventario</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Precio: </td>
+                <td><input type="number" id="txt-precio"></td>
+                <td>Tope: 6</td>
+                <td>
+                    <button id="btn-agregar-precio">Agregar Precio</button>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <textarea name="" id="txt-listado-precios" placeholder="listado de precios" rows="8" readonly></textarea>
+                </td>
+                <td align="center">
+                    <button id="btn-presentar-precios">Presentar</button>
+                </td>
+                <td align="center">
+                    <button id="btn-cargar-precios">Cargar Precios</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Total Inv. $</td>
+                <td>
+                    <input type="text" placeholder="$0.00" readonly id="txt-total-inventario">
+                </td>
+                <td>
+                    <button id="btn-calcular-total">Calcular Total</button>
+                </td>
+                <td></td>
+            </tr>
+        </tbody>
+
+    </table>
+
+    <script>
+        // Agregar refrencia a los controles.
+        const txtPrecio = document.getElementById('txt-precio')
+        const btnAgregarPrecio = document.getElementById('btn-agregar-precio')
+
+        const txtListadoPrecios = document.getElementById('txt-listado-precios')
+        const btnPresentarPrecios = document.getElementById('btn-presentar-precios')
+
+        const txtTotalInventario = document.getElementById('txt-total-inventario')
+        const btnCalcularTotal = document.getElementById('btn-calcular-total')
+
+
+        const TOPE = 6
+        // Definir el Vector
+        let productos = [] // new Array()
+
+        // Agregar Evento Escuchador Click (Agregar)
+        btnAgregarPrecio.addEventListener('click', function(e){
+            // Extraer precio de la caja de texto
+            const precio = parseFloat(txtPrecio.value)
+            // Calcular cantidad de elementos del Vector
+            const cantElementos = productos.length
+
+            // mientras cantElementos sea Menor al TOPE=6 continuo agregando precios.
+            if (cantElementos < TOPE){
+                const indice = cantElementos
+                // Asignar o agregar el nuevo precio
+                productos[indice] = precio
+                // Presentar por console lo que tiene el Vector
+                console.log('productos: ', productos)
+                txtPrecio.value = ''
+            }
+            else{
+                alert("Ya no se puede ingresar precios..")
+            }
+
+        })
+
+
+        // Agregar Evento Escuchador Click (Presentar)
+        btnPresentarPrecios.addEventListener('click', function(e){
+            // Borramos los datos de la caja de texto
+            txtListadoPrecios.value = ''
+            //txtListadoPrecios.value = productos.join('\n')
+            for(let i=0; i < productos.length; i++){
+                // Agregamos los precios a la caja de texto - TextArea
+                txtListadoPrecios.value += productos[i] + '\n'
+            }
+        })
+
+
+        // Agregar Evento Escuchador Click (Total)
+        btnCalcularTotal.addEventListener('click', function(e){
+            const total = fnCalcularTotal()
+            txtTotalInventario.value = total.toFixed(2)
+        })
+
+
+        // Retorna total de inventario
+        function fnCalcularTotal(){
+            let totalInventario = 0 // Acumulador
+
+            for(let i = 0; i < productos.length ; i ++){
+                // acumulamos los precios
+                totalInventario = totalInventario + productos[i]
+            }
+            return totalInventario
+        }
+
+    </script>
+</body>
+</html>

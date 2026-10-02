@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 7 - Números Primos</title>
+</head>
+<body>
+
+    <table>
+        <tr>
+            <td>Cantidad de primos (N):</td>
+        </tr>
+        <tr>
+            <td><input type="text" id="cantidadN"></td>
+        </tr>
+        <tr>
+            <td>Los primeros N primos:</td>
+        </tr>
+        <tr>
+            <td id="listaPrimos"></td>
+        </tr>
+        <tr>
+            <td>Primos entre 1 y 10:</td>
+        </tr>
+        <tr>
+            <td id="rango1"></td>
+        </tr>
+        <tr>
+            <td>Primos entre 15 y 25:</td>
+        </tr>
+        <tr>
+            <td id="rango2"></td>
+        </tr>
+        <tr>
+            <td><button onclick="mostrarPrimos()">Calcular</button></td>
+        </tr>
+    </table>
+
+    <script>
+        function mostrarPrimos() {
+            let N = parseInt(document.getElementById("cantidadN").value);
+            let contadorPrimosEncontrados = 0;
+            let numeroEvaluar = 2;
+            let contadorRango1_10 = 0;
+            let contadorRango15_25 = 0;
+            let listaPrimos = "";
+
+            while (contadorPrimosEncontrados < N) {
+                let esPrimo = true;
+                for (let i = 2; i < numeroEvaluar; i++) {
+                    if (numeroEvaluar % i === 0) {
+                        esPrimo = false;
+                        break;
+                    }
+                }
+                if (esPrimo) {
+                    listaPrimos += numeroEvaluar + ", ";
+                    contadorPrimosEncontrados++;
+
+                    // Contar por rangos
+                    if (numeroEvaluar >= 1 && numeroEvaluar <= 10) {
+                        contadorRango1_10++;
+                    }
+                    if (numeroEvaluar >= 15 && numeroEvaluar <= 25) {
+                        contadorRango15_25++;
+                    }
+                }
+                numeroEvaluar++;
+            }
+
+            
+            document.getElementById("listaPrimos").innerHTML = listaPrimos.slice(0, -2);
+            document.getElementById("rango1").innerHTML = contadorRango1_10;
+            document.getElementById("rango2").innerHTML = contadorRango15_25;
+        }
+    </script>
+
+</body>
+</html>
